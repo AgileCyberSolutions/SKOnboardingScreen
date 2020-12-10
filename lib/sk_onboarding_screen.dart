@@ -1,5 +1,6 @@
 library sk_onboarding_screen;
 
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sk_onboarding_screen/sk_onboarding_model.dart';
@@ -107,8 +108,8 @@ class SKOnboardingScreenState extends State<SKOnboardingScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Center(
-            child: Image(
-              image: AssetImage(page.imagePath),
+            child: SvgPicture.asset(
+              page.imagePath,
               height: 300.0,
               width: 300.0,
             ),
