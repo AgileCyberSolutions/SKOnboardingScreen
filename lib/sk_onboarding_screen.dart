@@ -8,16 +8,12 @@ class SKOnboardingScreen extends StatefulWidget {
   final List<SkOnboardingModel> pages;
   final Color bgColor;
   final Color themeColor;
-  final ValueChanged<String> skipClicked;
-  final ValueChanged<String> getStartedClicked;
 
   SKOnboardingScreen({
     Key key,
     @required this.pages,
     @required this.bgColor,
     @required this.themeColor,
-    @required this.skipClicked,
-    @required this.getStartedClicked,
   }) : super(key: key);
 
   @override
@@ -79,22 +75,6 @@ class SKOnboardingScreenState extends State<SKOnboardingScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   Container(
-                    alignment: Alignment.centerRight,
-                    child: FlatButton(
-                      onPressed: () {
-                        widget.skipClicked("Skip Tapped");
-                      },
-                      child: Text(
-                        'Skip',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black,
-                          fontSize: 20,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Container(
                     height: 500.0,
                     color: Colors.transparent,
                     child: PageView(
@@ -111,38 +91,12 @@ class SKOnboardingScreenState extends State<SKOnboardingScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: _buildPageIndicator(),
                   ),
-                  _currentPage != widget.pages.length - 1
-                      ? Expanded(
-                          child: Align(
-                            alignment: FractionalOffset.bottomRight,
-                            child: Padding(
-                              padding: EdgeInsets.only(right: 20, bottom: 10),
-                              child: FloatingActionButton(
-                                backgroundColor: widget.bgColor,
-                                child: Icon(
-                                  Icons.arrow_forward,
-                                  color: widget.themeColor,
-                                ),
-                                onPressed: () {
-                                  _pageController.nextPage(
-                                    duration: Duration(milliseconds: 500),
-                                    curve: Curves.ease,
-                                  );
-                                },
-                              ),
-                            ),
-                          ),
-                        )
-                      : Text(''),
                 ],
               ),
             ),
           ),
         ),
       ),
-      bottomSheet: _currentPage == widget.pages.length - 1
-          ? _showGetStartedButton()
-          : Text(''),
     );
   }
 
@@ -184,7 +138,6 @@ class SKOnboardingScreenState extends State<SKOnboardingScreen> {
 
   Widget _showGetStartedButton() {
     final GestureDetector loginButtonWithGesture = new GestureDetector(
-      onTap: _getStartedTapped,
       child: new Container(
         height: 50.0,
         decoration: new BoxDecoration(
@@ -206,9 +159,5 @@ class SKOnboardingScreenState extends State<SKOnboardingScreen> {
         padding:
             EdgeInsets.only(left: 20.0, right: 20.0, top: 5.0, bottom: 30.0),
         child: loginButtonWithGesture);
-  }
-
-  void _getStartedTapped() {
-    widget.getStartedClicked("Get Started Tapped");
   }
 }
